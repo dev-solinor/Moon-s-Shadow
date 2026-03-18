@@ -41,14 +41,12 @@ Inspired by the exploration and environmental storytelling of *The Legend of Zel
 
 ```
 Assets/
-├── _Project/
-│   ├── Scripts/         # All C# game logic
-│   ├── Scenes/          # Unity scenes
-│   ├── Prefabs/         # Reusable game objects
-│   └── Materials/       # Shaders and materials
-├── Art/                 # Environment assets, models, textures
-└── Audio/               # Sound effects and music (planned)
+├── Scenes/              # Unity scenes
+├── Settings/            # Project & render pipeline settings
+└── InputSystem_Actions  # Input mapping (Unity Input System)
 ```
+ 
+> The project structure will expand as development progresses (Scripts, Prefabs, Materials, Art...).
 
 ---
 
