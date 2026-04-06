@@ -8,23 +8,23 @@ using UnityEngine.InputSystem;
 public class PlayerInputHandler : MonoBehaviour
 {
     // Public Properties
-
     public Vector2 MoveInput { get; private set; }
+    public Vector2 LookInput { get; private set; }
     public bool JumpPressed { get; private set; }
     public bool SprintHeld { get; private set; }
 
     // Serialized References
-
     [Header("Input Actions")]
     [SerializeField] private InputActionReference _moveAction;
+    [SerializeField] private InputActionReference _lookAction;
     [SerializeField] private InputActionReference _jumpAction;
     [SerializeField] private InputActionReference _sprintAction;
 
     // Lifecycle
-
     private void OnEnable()
     {
         _moveAction.action.Enable();
+        _lookAction.action.Enable();
         _jumpAction.action.Enable();
         _sprintAction.action.Enable();
     }
@@ -33,6 +33,7 @@ public class PlayerInputHandler : MonoBehaviour
     private void OnDisable()
     {
         _moveAction.action.Disable();
+        _lookAction.action.Disable();
         _jumpAction.action.Disable();
         _sprintAction.action.Disable();
     }
@@ -40,6 +41,7 @@ public class PlayerInputHandler : MonoBehaviour
     private void Update()
     {
         MoveInput = _moveAction.action.ReadValue<Vector2>();
+        LookInput = _lookAction.action.ReadValue<Vector2>();
         JumpPressed = _jumpAction.action.WasPressedThisFrame();
         SprintHeld = _sprintAction.action.IsPressed();
     }

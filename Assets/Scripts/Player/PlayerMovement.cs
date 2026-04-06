@@ -6,7 +6,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     // Serialized Settings
-
     [Header("Movement")]
     [SerializeField] private float _walkSpeed = 4f;
     [SerializeField] private float _sprintSpeed = 7f;
@@ -22,12 +21,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform _meshRoot;
 
     // Private
-
     private Camera _cam;
     private Vector3 _velocity;
 
     // Lifecycle
-
     private void Awake()
     {
         _cam = Camera.main;
@@ -38,19 +35,16 @@ public class PlayerMovement : MonoBehaviour
         ApplyGravity();
         Move();
         Jump();
+        transform.rotation = Quaternion.identity; // root ne tourne jamais
     }
 
     // Movement
-
     private void Move()
     {
         Vector2 input = _input.MoveInput;
-
         if (input == Vector2.zero) return;
 
-        Vector3 camForward = Vector3.ProjectOnPlane(_cam.transform.forward, Vector3.up).normalized;
-        Vector3 camRight = Vector3.ProjectOnPlane(_cam.transform.right, Vector3.up).normalized;
-        Vector3 direction = (camForward * input.y + camRight * input.x).normalized;
+        Vector3 direction = new Vector3(input.x, 0f, input.y).normalized;
 
         float speed = _input.SprintHeld ? _sprintSpeed : _walkSpeed;
         _controller.Move(direction * speed * Time.deltaTime);
@@ -76,7 +70,6 @@ public class PlayerMovement : MonoBehaviour
         {
             _velocity.y = -2f;
         }
-
         _velocity.y += _gravity * Time.deltaTime;
         _controller.Move(_velocity * Time.deltaTime);
     }
